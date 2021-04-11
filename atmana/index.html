@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+           
+        }
+        body{
+            border: 3px solid green;
+        }
+        .jokes_category{
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            background-color: black;
+            padding: 20px;
+        }
+        button{
+            width: 100px;
+            margin: auto;
+            color: aliceblue;
+            background-color: blue;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            margin: 20px auto;
+            cursor: pointer;
+         }
+         button:hover{
+             background-color:yellow;
+             color: black;
+         }
+         .joke_area{
+            display: grid;
+            grid-template-columns: auto auto;
+             background-color: darkorange;
+             color: black;
+             padding: 30px;
+             margin: 20px;
+             border-radius: 10px;
+         }
+         #joke{
+             margin: auto 20px;
+             line-height: 25px;
+         }
+         h1,h4{
+            text-align: center;
+         }
+         h1{
+             padding: 20px;
+         }
+         h3{
+             font-size: medium;
+             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+         }
+         hr{
+             height: 60px;
+             visibility: hidden;
+         }
+         h4{
+            font-size: 25px;
+            margin: 10px;
+            color: darkmagenta;
+         }
+         .newjoke{
+          margin:auto 20px;
+          align-self: center;
+          width: 100%;
+          font-size: 25px;
+         }
+         .newjokediv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+@media screen and (max-width: 480px){
+    .joke_area{
+            display: grid;
+            grid-template-columns: auto;
+             background-color: blueviolet;
+             color: black;
+             padding: 20px;
+             margin: 20px;
+             border-radius: 10px;
+         }
+         .jokes_category{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            background-color: black;
+            padding: 20px;
+        }
+        button{
+            width:80px;
+        }
+}
+    </style>
+</head>
+
+<body>
+    <h1>Jokes Category</h1>
+    <div class="jokes_category">
+      
+    <button  onclick="getdata('animal')">Animal</button>
+    <button  onclick="getdata('career')">career</button>
+    <button  onclick="getdata('celebrity')">celebrity</button>
+    <button  onclick="getdata('dev')">dev</button>
+    <button  onclick="getdata('explicit')">explicit</button>
+    <button  onclick="getdata('fashion')">fashion</button>
+    <button  onclick="getdata('food')">food</button>
+    <button  onclick="getdata('history')">history</button>
+    <button  onclick="getdata('money')">money</button>
+    <button  onclick="getdata('movie')">movie</button>
+    <button  onclick="getdata('music')">music</button>
+    <button  onclick="getdata('political')">political</button>
+    <button  onclick="getdata('religion')">religion</button>
+    <button  onclick="getdata('science')">science</button>
+    <button  onclick="getdata('sport')">sport</button>
+    <button  onclick="getdata('travel')">travel</button>
+</div>
+<hr>
+<h4 style="color: teal;">Selected Category</h4><h4 id="category"></h4>
+    <div class="joke_area">
+        <img src="https://assets.chucknorris.host/img/avatar/chuck-norris.png" id="img" height="150px" width="150px">
+<h3 id="joke"></h3>
+    </div>
+    <div class="newjokediv">
+    <button onclick="newjoke()" class="newjoke">New Joke</button>
+</div>
+    <script>
+
+async function getdata(x)
+{
+    const category=x;
+ var url = 'https://api.chucknorris.io/jokes/random?category='+category;
+    const api_call= await fetch(url);
+    const response = await api_call.json();
+    document.getElementById("joke").innerHTML=response.value;
+ document.getElementById("category").innerHTML=response.categories;
+ document.getElementById("img").src=response.icon_url;
+}
+function newjoke()
+{
+    var x = document.getElementById("category").innerText;
+       getdata(x);
+}
+    </script>
+</body>
+</html>
